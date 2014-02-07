@@ -18,7 +18,7 @@ public class GameGUI extends JFrame
 	public GameGUI(int initialGridSize)
 	{
 		currentGame = new Game(initialGridSize);
-		setTitle("Complex Snake by " + /*currentGame.getAuthor()*/ "Josh Langley"  + ".");
+		setTitle("Complex Snake game by " + /*currentGame.getAuthor()*/ currentGame.getAuthor()  + ".");
 		setSize(500, 600);
 		Container contents = getContentPane();
 		mainGrid.setLayout(new GridLayout(initialGridSize, initialGridSize,0,0));
@@ -27,8 +27,8 @@ public class GameGUI extends JFrame
 		setScoreMessage("Press R to start new game.");
 		scoreBar.add(scoreMessage, BorderLayout.WEST);
 		scoreBar.add(scoreCounter, BorderLayout.EAST);
-		contents.setLayout(new GridLayout(0,1,5,5));
-		contents.add(scoreBar);
+		contents.setLayout(new BorderLayout());
+		contents.add(scoreBar, BorderLayout.NORTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setVisible(true);
 	}

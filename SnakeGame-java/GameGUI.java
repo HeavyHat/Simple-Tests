@@ -3,9 +3,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
+import java.awt.Image;
 
-public class GameGUI extends JFrame
+public class GameGUI extends JFrame implements KeyListener
 {
 	private final Game currentGame;
 	private final Container scoreBar = new Container();
@@ -21,6 +24,9 @@ public class GameGUI extends JFrame
 		setTitle("Complex Snake game by " + /*currentGame.getAuthor()*/ currentGame.getAuthor()  + ".");
 		setSize(500, 600);
 		Container contents = getContentPane();
+		setFocusable(true);
+		requestFocusInWindow();
+		addKeyListener(this);
 		mainGrid.setLayout(new GridLayout(initialGridSize, initialGridSize,0,0));
 		scoreBar.setLayout(new BorderLayout());
 		setScore(0);
@@ -33,6 +39,29 @@ public class GameGUI extends JFrame
 		setVisible(true);
 	}
 
+	public void keyPressed(KeyEvent e)
+	{
+		char pressedChar = e.getKeyChar();
+		if(pressedChar == 'a')
+		{
+			int initialTailX, initialTailY, initialDirection;
+			initialTailX = getStartPosition();
+			initialTailY = getStartPosition();
+			initialDirection = getValidDirection();
+			currentGame.setInitialGameState(Direction.getRandomDirection(),;
+		}
+
+	}
+
+	public void keyReleased(KeyEvent e)
+	{
+
+	}
+
+	public void keyTyped(KeyEvent e)
+	{
+
+	}
 	public void setScore(int currentScore)
 	{
 		scoreCounter.setText(String.format("Score: %09d", currentScore));

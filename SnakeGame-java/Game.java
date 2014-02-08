@@ -1,11 +1,11 @@
 public class Game
 {
 
-	private Cell [] [] cellGrid;
+	private final Cell[][] cellGrid;
 
 	public Game(int sizeOfGrid)
 	{
-		cellGrid = new Cell [sizeOfGrid] [sizeOfGrid];
+		cellGrid = new Cell[sizeOfGrid][sizeOfGrid];
 	}
 
 	public String getAuthor()

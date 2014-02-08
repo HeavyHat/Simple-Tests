@@ -16,11 +16,12 @@ public class GameGUI extends JFrame implements KeyListener
 	private final JLabel scoreMessage = new JLabel();
 	private final JLabel scoreCounter = new JLabel();
 	private int score = 0;
-
+	private final int initGridSize;
 
 	public GameGUI(int initialGridSize)
 	{
 		currentGame = new Game(initialGridSize);
+		initGridSize = initialGridSize;
 		setTitle("Complex Snake game by " + /*currentGame.getAuthor()*/ currentGame.getAuthor()  + ".");
 		setSize(500, 600);
 		Container contents = getContentPane();
@@ -44,13 +45,17 @@ public class GameGUI extends JFrame implements KeyListener
 		char pressedChar = e.getKeyChar();
 		if(pressedChar == 'a')
 		{
-			int initialTailX, initialTailY, initialDirection;
+			int initialTailX, initialTailY;
 			initialTailX = getStartPosition();
 			initialTailY = getStartPosition();
-			initialDirection = getValidDirection();
-			currentGame.setInitialGameState(Direction.getRandomDirection(),;
+			currentGame.setInitialGameState(Direction.getRandomStart(initialTailX,initialTailY),initialTailX,initialTailY,initGridSize);
 		}
 
+	}
+
+	private int getStartPosition()
+	{
+		return (Math.random() >= 0.5) ? (initGridSize - 1): 0 ;
 	}
 
 	public void keyReleased(KeyEvent e)
